@@ -4,7 +4,10 @@
       {{ currentStage.name }}
     </div>
     <KeepAlive>
-      <component :is="currentStage.component"></component>
+      <component
+        :is="currentStage.component"
+        :data="currentStage.data"
+      ></component>
     </KeepAlive>
   </div>
 </template>

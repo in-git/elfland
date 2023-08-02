@@ -23,7 +23,7 @@
 
 <style lang="scss" scoped>
   ul.content {
-    background-color: var(--background-color);
+    background-color: #f8f8f8;
     li {
       line-height: 32px;
     }

@@ -1,29 +1,9 @@
 import { markRaw } from 'vue';
+import { importAssets } from '@/utils/utils';
 import { GameStageList } from '../types';
 import AddventureVue from './AdeventureList.vue';
-/* 野外探险环节 */
-const addventureList = [
-  {
-    name: '野外',
-    data: [],
-  },
-  {
-    name: '悬崖',
-    data: [],
-  },
-  {
-    name: '坟场 ',
-    data: [],
-  },
-  {
-    name: '远古森林 ',
-    data: [],
-  },
-  {
-    name: '食人部落 ',
-    data: [],
-  },
-];
+import addventureList from './addventure';
+
 const list: GameStageList[] = [
   {
     name: '探险',

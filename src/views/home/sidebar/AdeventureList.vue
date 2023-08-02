@@ -1,7 +1,7 @@
 <template>
   <div class="adventrue-list h-100 p-12">
     <div
-      v-for="item in 50"
+      v-for="item in data"
       :key="item"
       class="card px-12 py-4 flex flex-col gr-4"
     >
@@ -15,7 +15,7 @@
         </div>
         <div class="flex gc-4">
           <div>Miss</div>
-          <div class="tag"> 10% </div>
+          <div class="tag"> {{ item.attr.miss * 100 }}% </div>
         </div>
       </div>
 
@@ -29,6 +29,10 @@
 
 <script setup lang="ts">
   import tree from '@/assets/stage/tree.webp';
+
+  const props = defineProps<{
+    data: any[];
+  }>();
 </script>
 
 <style lang="scss" scoped>

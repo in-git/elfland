@@ -4,36 +4,51 @@
       <li
         v-for="(item, key) in list"
         :key="key"
-        :class="{ active: item.title === current }"
+        :class="{ active: item.title === current.title }"
         @click="selectItem(item)"
       >
         {{ item.title }}
       </li>
     </ul>
 
-    <RouterView name="assets" />
+    <KeepAlive>
+      <component :is="current.component"></component>
+    </KeepAlive>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ref, markRaw } from 'vue';
+  import HeroAttribute from './hero/HeroAttribute.vue';
+  import WorldVue from './world/WorldVue.vue';
+  import Backpack from './backpack/Backpack.vue';
 
-  const list = [
+  interface Tabbar {
+    title: string;
+    component: any;
+  }
+  const list: Tabbar[] = [
     {
       title: '属性',
-    },
-    {
-      title: '世界',
+      component: markRaw(HeroAttribute),
     },
     {
       title: '背包',
+      component: markRaw(Backpack),
+    },
+    {
+      title: '世界',
+      component: markRaw(WorldVue),
     },
   ];
 
-  const current = ref('属性');
+  const current = ref<Tabbar>({
+    title: '属性',
+    component: markRaw(HeroAttribute),
+  });
 
-  const selectItem = (item: any) => {
-    current.value = item.title;
+  const selectItem = (item: Tabbar) => {
+    current.value = item;
   };
 </script>
 

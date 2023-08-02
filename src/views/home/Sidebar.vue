@@ -22,7 +22,6 @@
 </template>
 
 <script setup lang="ts">
-  import { useRouter } from 'vue-router';
   import data from './sidebar/data';
   import { GameStage, GameStageList } from './types';
   import { currentStage } from './delivery';
