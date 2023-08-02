@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "mikestead.dotenv",
+    "Vue.volar",
+    "steoates.autoimport",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "EditorConfig.EditorConfig",
+    "usernamehw.errorlens",
+    "shd101wyy.markdown-preview-enhanced",
+    "antfu.goto-alias",
+    "yoavbls.pretty-ts-errors",
+    "bodil.prettier-toml",
+    "bungcip.better-toml"
+  ]
+}
