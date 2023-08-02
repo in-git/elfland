@@ -15,7 +15,7 @@
         </div>
         <div class="flex gc-4">
           <div>Miss</div>
-          <div class="tag"> {{ item.attr.miss * 100 }}% </div>
+          <div class="tag"> {{ item.miss * 100 }}% </div>
         </div>
       </div>
 
@@ -43,6 +43,7 @@
     grid-template-rows: repeat(auto-fit, 250px);
     gap: 8px;
     overflow-y: auto;
+    font-size: 12px;
     .card {
       height: 250px;
       width: 180px;
@@ -52,7 +53,6 @@
     .tag {
       background-color: var(--background-color);
       padding: 0 8px;
-      font-size: 12px;
     }
     .tool {
       height: 32px;

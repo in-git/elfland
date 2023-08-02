@@ -1,10 +1,23 @@
 import { importAssets } from '@/utils/utils';
-import { WorldObject } from '../types';
+
+interface AddventureData {
+  /* 价格，未来可出售 */
+  price: number;
+  /* 已有的数量 */
+  quantity: number;
+  /* 开采丢失概率 */
+  miss: number;
+  /* 对应的图片资源 */
+  src: string;
+  /* 名字 */
+  name: string;
+}
 
 interface DataList {
   name: string;
-  data: WorldObject[];
+  data: AddventureData[];
 }
+
 /* 野外探险环节 */
 const addventureList: DataList[] = [
   {
@@ -13,11 +26,9 @@ const addventureList: DataList[] = [
       {
         src: importAssets('stage/tree.webp'),
         name: '松树',
-        attr: {
-          price: 1,
-          quantity: 0,
-          miss: 0.1,
-        },
+        price: 1,
+        miss: 0.1,
+        quantity: 0,
       },
     ],
   },
