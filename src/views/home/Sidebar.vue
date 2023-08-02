@@ -12,7 +12,7 @@
           :key="k"
           class="list"
           :class="{ active: v.name === currentStage.name }"
-          @click="selectItem(v)"
+          @click="selectItem(v, item)"
         >
           <div class="list-name">{{ v.name }}</div>
         </div>
@@ -22,12 +22,14 @@
 </template>
 
 <script setup lang="ts">
+  import { useRouter } from 'vue-router';
   import data from './sidebar/data';
-  import { GameStage } from './types';
+  import { GameStage, GameStageList } from './types';
   import { currentStage } from './delivery';
 
-  const selectItem = (item: GameStage) => {
+  const selectItem = (item: GameStage, parent: GameStageList) => {
     currentStage.value = item;
+    currentStage.value.component = parent.component;
   };
 </script>
 
