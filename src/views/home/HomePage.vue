@@ -9,7 +9,7 @@
 <script setup lang="ts">
   import SidebarVue from './Sidebar.vue';
   import MainVue from './Main.vue';
-  import AttributeVue from './Attribute.vue';
+  import AttributeVue from './Assets.vue';
 </script>
 
 <style lang="scss" scoped>

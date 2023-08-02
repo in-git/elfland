@@ -1,9 +1,14 @@
 <template>
-  <div class="main-section flex-1 px-12 py-8 flex flex-col">
+  <div class="main-section flex-1 px-12 py-8 flex flex-col gr-4">
     <div class="header text-bold">
       {{ currentStage.name }}
     </div>
-    <div class="stage flex-1"> </div>
+    <KeepAlive>
+      <component
+        :is="currentStage.component"
+        :data="currentStage.data"
+      ></component>
+    </KeepAlive>
   </div>
 </template>
 

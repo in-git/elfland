@@ -1,41 +1,25 @@
+import { markRaw } from 'vue';
+import { importAssets } from '@/utils/utils';
 import { GameStageList } from '../types';
+import AddventureVue from './AdeventureList.vue';
+import addventureList from './addventure';
 
 const list: GameStageList[] = [
   {
     name: '探险',
-    list: [
-      {
-        name: '野外',
-        router: '',
-      },
-      {
-        name: '悬崖',
-        router: '',
-      },
-      {
-        name: '坟场 ',
-        router: '',
-      },
-      {
-        name: '远古森林 ',
-        router: '',
-      },
-      {
-        name: '食人部落 ',
-        router: '',
-      },
-    ],
+    component: markRaw(AddventureVue),
+    list: addventureList,
   },
   {
     name: '商店',
     list: [
       {
         name: '杂货 ',
-        router: '',
+        data: [],
       },
       {
         name: '武器 ',
-        router: '',
+        data: [],
       },
     ],
   },
@@ -44,19 +28,19 @@ const list: GameStageList[] = [
     list: [
       {
         name: '原始社会 ',
-        router: '',
+        data: [],
       },
       {
         name: '夏朝 ',
-        router: '',
+        data: [],
       },
       {
         name: '商朝 ',
-        router: '',
+        data: [],
       },
       {
         name: '周朝 ',
-        router: '',
+        data: [],
       },
     ],
   },
