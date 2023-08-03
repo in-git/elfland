@@ -12,7 +12,7 @@
           :key="k"
           class="list"
           :class="{ active: v.name === currentStage.name }"
-          @click="selectItem(v, item)"
+          @click="selectItem(v)"
         >
           <div class="list-name">{{ v.name }}</div>
         </div>
@@ -26,9 +26,9 @@
   import { GameStage, GameStageList } from './types';
   import { currentStage } from './delivery';
 
-  const selectItem = (item: GameStage, parent: GameStageList) => {
+  const selectItem = (item: GameStage) => {
     currentStage.value = item;
-    currentStage.value.component = parent.component;
+    currentStage.value.component = item.component;
   };
 </script>
 

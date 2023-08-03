@@ -74,6 +74,8 @@
     sellingPrice: 0,
     src: '',
     total: 0,
+    effect: {},
+    flag: '',
   });
   const count = ref(0);
 

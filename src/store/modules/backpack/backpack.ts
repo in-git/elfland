@@ -9,27 +9,27 @@ const materialStore = defineStore('material', {
       name: '木头',
     },
     stone: {
-      exchangeRatio: 0.5,
+      exchangeRatio: 1,
       quantity: 0,
       name: '石头',
     },
     copper: {
-      exchangeRatio: 0.5,
+      exchangeRatio: 5,
       quantity: 0,
       name: '铜',
     },
     fish: {
-      exchangeRatio: 0.5,
+      exchangeRatio: 20,
       quantity: 0,
       name: '鱼',
     },
     iron: {
-      exchangeRatio: 0.5,
+      exchangeRatio: 100,
       quantity: 0,
       name: '铁',
     },
     gold: {
-      exchangeRatio: 0.5,
+      exchangeRatio: 180,
       quantity: 0,
       name: '金子',
     },

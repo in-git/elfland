@@ -18,7 +18,7 @@
         </div>
         <div class="flex gc-4" :class="[item.tips === 'miss' ? 'miss' : '']">
           <div>Miss</div>
-          <div class="tag"> {{ (item.miss * 100).toFixed(0) }}% </div>
+          <div class="tag"> {{ item.miss * 100 }}% </div>
         </div>
       </div>
       <div class="flex justify-between">
@@ -92,7 +92,7 @@
           if (m === v.flag && v.total > 0) {
             // eslint-disable-next-line no-restricted-syntax, guard-for-in
             for (const key in v.effect) {
-              e[key] += v.effect[key];
+              e[key] = v.effect[key];
             }
             e.imgs.push(v.src);
           }

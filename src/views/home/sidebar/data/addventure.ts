@@ -1,4 +1,6 @@
 import { importAssets } from '@/utils/utils';
+import { Component, markRaw } from 'vue';
+import AdeventureList from '../AdeventureList.vue';
 
 export interface AddventureType {
   /* 价格，未来可出售 */
@@ -25,12 +27,14 @@ export interface AddventureType {
 interface DataList {
   name: string;
   data: AddventureType[];
+  component: Component;
 }
 
 /* 野外探险环节 */
 const addventureList: DataList[] = [
   {
     name: '野外',
+    component: markRaw(AdeventureList),
     data: [
       {
         src: importAssets('stage/tree.webp'),
@@ -45,7 +49,7 @@ const addventureList: DataList[] = [
       {
         src: importAssets('stage/stone.png'),
         name: '石头',
-        price: 1,
+        price: 3,
         miss: 0.9,
         accumulative: 1,
         flag: 'stone',
@@ -53,22 +57,6 @@ const addventureList: DataList[] = [
         condition: ['pickaxe'],
       },
     ],
-  },
-  {
-    name: '悬崖',
-    data: [],
-  },
-  {
-    name: '坟场 ',
-    data: [],
-  },
-  {
-    name: '远古森林 ',
-    data: [],
-  },
-  {
-    name: '食人部落 ',
-    data: [],
   },
 ];
 export default addventureList;

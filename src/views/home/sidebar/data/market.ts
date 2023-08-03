@@ -1,10 +1,14 @@
 import pickaxe from '@/assets/market/pickaxe.png';
 import axe from '@/assets/market/axe.png';
-import { Commodity } from '../types';
+import { Component, markRaw } from 'vue';
+import { Commodity } from '../../types';
+import Market from '../Market.vue';
+import Weapon from '../Weapon.vue';
 
 export interface CommodityList {
   name: string;
   data: Commodity[];
+  component?: Component;
 }
 const market: CommodityList[] = [
   {
@@ -18,7 +22,7 @@ const market: CommodityList[] = [
         flag: 'axe',
         effect: {
           /* miss几率 */
-          miss: -0.4,
+          miss: 0.4,
           /* 伐木效率 */
           accumulative: 2,
         },
@@ -26,16 +30,21 @@ const market: CommodityList[] = [
       {
         name: '镐',
         price: 200,
-        desc: ['有了镐才能开采矿石'],
+        desc: ['降低Miss概率20%', '效率+1'],
         src: pickaxe,
         flag: 'pickaxe',
-        effect: {},
+        effect: {
+          miss: 0.7,
+          accumulative: 2,
+        },
       },
     ],
+    component: markRaw(Market),
   },
   {
     name: '武器 ',
     data: [],
+    component: markRaw(Weapon),
   },
 ];
 export default market;

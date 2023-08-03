@@ -1,7 +1,7 @@
 import { Component, Ref, markRaw, ref } from 'vue';
 import { GameStage } from './types';
 import AddventureVue from './sidebar/AdeventureList.vue';
-import addventureList from './sidebar/addventure';
+import addventureList from './sidebar/data/addventure';
 
 /* 获取当前的场景 */
 export const currentStage = ref<GameStage & { component?: Component }>({
