@@ -32,7 +32,7 @@ const addventureList: DataList[] = [
         src: importAssets('stage/tree.webp'),
         name: '松树',
         price: 1,
-        miss: 0.1,
+        miss: 0.7,
         accumulative: 1,
         flag: 'woods',
       },

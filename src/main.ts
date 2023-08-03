@@ -7,6 +7,7 @@ import 'in-less';
 import '@/assets/style/global.less';
 import '@/api/interceptor';
 import router from './router';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);

@@ -31,7 +31,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
   import tree from '@/assets/stage/tree.webp';
   import { getBackpack } from '@/store/modules/backpack/utils';
   import { Backpack } from '@/store/modules/backpack/types';

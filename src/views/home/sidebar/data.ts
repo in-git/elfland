@@ -2,7 +2,10 @@ import { markRaw } from 'vue';
 import { importAssets } from '@/utils/utils';
 import { GameStageList } from '../types';
 import AddventureVue from './AdeventureList.vue';
+import MarketVue from './Market.vue';
 import addventureList from './addventure';
+import CiviliztionVue from './Civilization.vue';
+import market from './market';
 
 const list: GameStageList[] = [
   {
@@ -12,19 +15,12 @@ const list: GameStageList[] = [
   },
   {
     name: '商店',
-    list: [
-      {
-        name: '杂货 ',
-        data: [],
-      },
-      {
-        name: '武器 ',
-        data: [],
-      },
-    ],
+    component: markRaw(MarketVue),
+    list: market,
   },
   {
     name: '朝代',
+    component: markRaw(CiviliztionVue),
     list: [
       {
         name: '原始社会 ',

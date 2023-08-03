@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
   import { ref, markRaw } from 'vue';
-  import HeroAttribute from './hero/HeroAttribute.vue';
+  import Materials from './Materials.vue';
   import WorldVue from './world/WorldVue.vue';
   import Backpack from './backpack/Backpack.vue';
 
@@ -29,8 +29,8 @@
   }
   const list: Tabbar[] = [
     {
-      title: '属性',
-      component: markRaw(HeroAttribute),
+      title: '财产',
+      component: markRaw(Materials),
     },
     {
       title: '背包',
@@ -43,8 +43,8 @@
   ];
 
   const current = ref<Tabbar>({
-    title: '属性',
-    component: markRaw(HeroAttribute),
+    title: '财产',
+    component: markRaw(Materials),
   });
 
   const selectItem = (item: Tabbar) => {
