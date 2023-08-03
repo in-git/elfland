@@ -1,5 +1,5 @@
 <template>
-  <div class="attribute py-8 flex flex-col gr-12">
+  <div v-if="showRightSidebar" class="attribute py-8 flex flex-col gr-12">
     <div class="hero-style p-12 text-center flex flex-col gr-4">
       <img :src="elf" class="w-100" />
       <div class="username py-4">{{ info.username || '匿名' }}</div>
@@ -27,6 +27,7 @@
   import elf from '@/assets/hero/elf-girl.webp';
   import { getUserInfo } from '@/store/modules/user/utils';
   import AsstesVue from './assets/Asstes.vue';
+  import { showRightSidebar } from './delivery';
 
   const info = computed(() => {
     return getUserInfo();

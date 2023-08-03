@@ -9,5 +9,5 @@ export const currentStage = ref<GameStage & { component?: Component }>({
   data: addventureList[0].data,
   component: markRaw(AddventureVue),
 });
-
-export default {};
+export const showSidebar = ref(true);
+export const showRightSidebar = ref(true);

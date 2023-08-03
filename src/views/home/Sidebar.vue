@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar h-100 px-12 py-8">
+  <div v-if="showSidebar" class="sidebar h-100 px-12 py-8">
     <ul class="flex flex-col justify-between h-100">
       <li
         v-for="(item, key) in data.list"
@@ -24,7 +24,7 @@
 <script setup lang="ts">
   import data from './sidebar/data';
   import { GameStage, GameStageList } from './types';
-  import { currentStage } from './delivery';
+  import { currentStage, showSidebar } from './delivery';
 
   const selectItem = (item: GameStage) => {
     currentStage.value = item;
@@ -34,6 +34,7 @@
 
 <style lang="scss" scoped>
   .sidebar {
+    min-width: 150px;
     width: 300px;
     background-color: #eee;
     border-radius: var(--radius);
