@@ -1,3 +1,4 @@
-export interface UserState {
-  name?: string;
+// 英雄
+export interface Hero {
+  username?: string;
 }

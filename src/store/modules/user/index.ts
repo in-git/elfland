@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
-import { UserState } from './types';
+import { Hero } from './types';
 
 const useUserStore = defineStore('user', {
-  state: (): UserState => ({
-    name: undefined,
+  state: (): Hero => ({
+    username: undefined,
   }),
   persist: true,
 });

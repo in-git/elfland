@@ -8,18 +8,43 @@
       </ul>
       <h6 class="my-12">资源</h6>
       <ul class="content px-12">
-        <li>木头</li>
-        <li>石头</li>
-        <li>鱼</li>
-        <li>铁</li>
-        <li>铜</li>
-        <li>金</li>
+        <li class="flex justify-between">
+          <span>木头</span>
+          <span>{{ backpack.woods }}</span>
+        </li>
+        <li class="flex justify-between">
+          <span>石头</span>
+          <span>{{ backpack.stone }}</span>
+        </li>
+        <li class="flex justify-between">
+          <span>鱼</span>
+          <span>{{ backpack.fish }}</span>
+        </li>
+        <li class="flex justify-between">
+          <span>铁</span>
+          <span>{{ backpack.iron }}</span>
+        </li>
+        <li class="flex justify-between">
+          <span>铜</span>
+          <span>{{ backpack.copper }}</span>
+        </li>
+        <li class="flex justify-between">
+          <span>铁</span>
+          <span>{{ backpack.gold }}</span>
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+  import { computed } from 'vue';
+  import { getBackpack } from '@/store/modules/backpack/utils';
+
+  const backpack = computed(() => {
+    return getBackpack();
+  });
+</script>
 
 <style lang="scss" scoped>
   ul.content {

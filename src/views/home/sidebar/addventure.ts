@@ -1,21 +1,26 @@
 import { importAssets } from '@/utils/utils';
 
-interface AddventureData {
+export interface AddventureType {
   /* 价格，未来可出售 */
   price: number;
-  /* 已有的数量 */
-  quantity: number;
+  /* 开采数量，可累加 */
+  accumulative: number;
   /* 开采丢失概率 */
   miss: number;
   /* 对应的图片资源 */
   src: string;
   /* 名字 */
   name: string;
+  /* 标识，和背包或者其他地方对应 */
+  flag: string;
+
+  /* 用于一些自定义的提示,这类属性自定义即可 */
+  [key: string]: any;
 }
 
 interface DataList {
   name: string;
-  data: AddventureData[];
+  data: AddventureType[];
 }
 
 /* 野外探险环节 */
@@ -28,7 +33,8 @@ const addventureList: DataList[] = [
         name: '松树',
         price: 1,
         miss: 0.1,
-        quantity: 0,
+        accumulative: 1,
+        flag: 'woods',
       },
     ],
   },
