@@ -21,7 +21,12 @@
           <div class="tag"> {{ item.miss * 100 }}% </div>
         </div>
       </div>
-
+      <div class="flex justify-between">
+        <div class="flex gc-4">
+          <div>{{ getMaterialInfo(item).name }}</div>
+          <div class="tag"> {{ getMaterialInfo(item).quantity }} </div>
+        </div>
+      </div>
       <div class="tool"></div>
       <div class="allow button relative" @click="dig(item)">
         <button> 开采 </button>
@@ -36,7 +41,7 @@
   import { Material } from '@/store/modules/backpack/types';
   import { AddventureType } from './addventure';
 
-  const props = defineProps<{
+  defineProps<{
     data: AddventureType[];
   }>();
 
@@ -64,6 +69,12 @@
   const dig = (item: AddventureType) => {
     getTips(item);
   };
+  /* 合并装备属性 */
+  const merge = (item) => {};
+  const getMaterialInfo = (item: AddventureType) => {
+    const meterialInfo = getMaterial();
+    return meterialInfo[item.flag];
+  };
 </script>
 
 <style lang="scss" scoped>
@@ -71,12 +82,11 @@
     background-color: var(--background-color);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 0.2fr));
-    grid-template-rows: repeat(auto-fit, 250px);
+    grid-template-rows: repeat(auto-fit, 260px);
     gap: 8px;
     overflow-y: auto;
     font-size: 12px;
     .card {
-      height: 250px;
       width: 180px;
       background-color: white;
       user-select: none;

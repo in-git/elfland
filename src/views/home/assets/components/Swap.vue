@@ -34,6 +34,7 @@
             </div>
           </div>
         </div>
+        <hr />
         <div class="comfirm" @click="comfirm">
           <button>卖掉</button>
         </div>
@@ -102,10 +103,10 @@
       background-color: #eee;
       display: inline-block;
       width: fit-content;
-      border: 1px dashed var(--warning);
-      padding: 0 8px;
       button {
-        color: var(--warning);
+        padding: 0 8px;
+        color: white;
+        background-color: var(--warning);
       }
     }
   }

@@ -3,6 +3,8 @@ export interface MaterialItem {
   quantity: number;
   /* 汇率 */
   exchangeRatio: number;
+  /* 材料的名字 */
+  name: string;
 }
 /* 背包 */
 export interface Material {

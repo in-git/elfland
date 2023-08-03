@@ -164,7 +164,7 @@
     position: fixed;
     width: 600px;
     height: 400px;
-    background-color: #eee;
+    background-color: white;
     left: calc(50% - 300px);
     top: calc(50% - 200px);
     box-shadow: 0 0 25px gray;

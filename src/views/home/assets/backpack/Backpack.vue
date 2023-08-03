@@ -99,7 +99,7 @@
   const backpack = computed(() => {
     return getBackpack();
   });
-  onClickOutside(target, (event) => {
+  onClickOutside(target, () => {
     showSalePanel.value = false;
   });
 </script>
