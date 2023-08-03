@@ -13,6 +13,11 @@ export interface AddventureType {
   name: string;
   /* 标识，和背包或者其他地方对应 */
   flag: string;
+  /* 工具,用于加成收益 */
+  tools: string[];
+  /* 条件：当采矿时，需要改条件才能开采 */
+  condition: string[];
+
   /* 用于一些自定义的提示,这类属性自定义即可 */
   [key: string]: any;
 }
@@ -34,6 +39,18 @@ const addventureList: DataList[] = [
         miss: 0.7,
         accumulative: 1,
         flag: 'woods',
+        tools: ['axe'],
+        condition: [],
+      },
+      {
+        src: importAssets('stage/stone.png'),
+        name: '石头',
+        price: 1,
+        miss: 0.9,
+        accumulative: 1,
+        flag: 'stone',
+        tools: ['pickaxe'],
+        condition: ['pickaxe'],
       },
     ],
   },

@@ -44,7 +44,10 @@
           <div class="text-36">
             {{ alertWindow.name }} <span class="text-12">x1</span></div
           >
-          <div class="close text-16" @click="alertWindow.show = false">
+          <div
+            class="close cursor-pointer text-16"
+            @click="alertWindow.show = false"
+          >
             确定
           </div>
         </div>
@@ -90,6 +93,8 @@
           /* 降价出售逻辑 */
           sellingPrice: item.price * 0.8,
           total: 1,
+          effect: item.effect,
+          flag: item.flag,
         });
       }
     } else {

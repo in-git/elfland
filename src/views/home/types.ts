@@ -21,4 +21,11 @@ export interface Commodity {
   desc: string[];
   /* 商品图片 */
   src: string;
+  /* 用于JS识别变量，读取参数 */
+  flag: string;
+  effect: {
+    [key: string]: any;
+  };
+  /* 属性,作用 */
+  [key: string]: any;
 }

@@ -20,9 +20,13 @@ export interface Material {
 export interface Backpack {
   /* 名字 */
   name: string;
+  flag: string;
   /* 图片 */
   src: string;
   /*  售价 */
   sellingPrice: number;
   total: number;
+  effect: {
+    [key: string]: any;
+  };
 }

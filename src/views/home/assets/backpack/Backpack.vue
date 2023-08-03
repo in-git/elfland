@@ -89,7 +89,8 @@
       if (e.name === current.value.name && e.total > 0) {
         e.total -= count.value;
         const userInfo = getUserInfo();
-        userInfo.money = e.sellingPrice * e.total;
+        userInfo.money += e.sellingPrice * count.value;
+        // eslint-disable-next-line no-alert
         alert('出售成功');
         showSalePanel.value = false;
       }

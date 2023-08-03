@@ -1,7 +1,7 @@
 <template>
   <div class="swap">
     <div class="ml-4 relative">
-      <div class="cursor-pointer" @click="show = true">
+      <div class="cursor-pointer" @click="openSwap">
         <slot></slot>
       </div>
       <div
@@ -16,22 +16,21 @@
             @click="show = false"
           ></i>
         </div>
-        <input
-          v-model="quantity"
-          type="number"
-          placeholder="输入要兑换的数量"
-          :min="0"
-          @keydown.enter="comfirm"
-        />
+        <div class="flex align-center">
+          <input
+            v-model="quantity"
+            type="number"
+            placeholder="输入要兑换的数量"
+            :min="0"
+            :max="material.quantity"
+            @keydown.enter="comfirm"
+          />
+          <div class="all" @click="quantity = material.quantity">全部</div>
+        </div>
         <div class="flex gc-8">
-          <div>汇率</div>
+          <div>价值</div>
           <div>
-            <div class="text-12 text-666">
-              <span>木头 - 钱</span>
-            </div>
-            <div class="text-12 text-666">
-              <span class="tag">0.5 - 1</span>
-            </div>
+            {{ material.exchangeRatio * quantity }}
           </div>
         </div>
         <hr />
@@ -44,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, onUnmounted, ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { onClickOutside } from '@vueuse/core';
   import { MaterialItem } from '@/store/modules/backpack/types';
   import { getUserInfo } from '@/store/modules/user/utils';
@@ -58,6 +57,10 @@
   const target = ref();
   const quantity = ref(0);
 
+  const openSwap = () => {
+    show.value = true;
+    quantity.value = Math.ceil(props.material.quantity / 2);
+  };
   const comfirm = () => {
     if (quantity.value > props.material.quantity || quantity.value < 0) {
       quantity.value = 0;
@@ -107,6 +110,17 @@
         padding: 0 8px;
         color: white;
         background-color: var(--warning);
+      }
+    }
+    .all {
+      padding: 0 4px;
+      white-space: nowrap;
+      font-size: 12px;
+      line-height: 24px;
+      cursor: pointer;
+      &:hover {
+        background-color: #999;
+        color: white;
       }
     }
   }

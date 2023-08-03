@@ -17,7 +17,7 @@
         <span>石头</span>
         <div class="flex">
           <span class="px-8">{{ material.stone.quantity }}</span>
-          <SwapVue :material="material.woods" name="woods">
+          <SwapVue :material="material.stone" name="stone">
             <span class="sale-button">
               <i class="bi-arrow-left-right bi"></i>
             </span>

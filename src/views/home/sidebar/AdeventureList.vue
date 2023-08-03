@@ -1,12 +1,12 @@
 <template>
   <div class="adventrue-list h-100 p-12">
     <div
-      v-for="(item, key) in data"
+      v-for="(item, key) in comData"
       :key="key"
-      class="card px-12 py-4 flex flex-col gr-4"
+      class="card px-12 py-4 flex flex-col gr-4 justify-between"
     >
       <div class="text-center relative">
-        <img :src="tree" width="120" />
+        <img :src="item.src" width="120" />
       </div>
       <div class="flex justify-between">
         <div
@@ -18,7 +18,7 @@
         </div>
         <div class="flex gc-4" :class="[item.tips === 'miss' ? 'miss' : '']">
           <div>Miss</div>
-          <div class="tag"> {{ item.miss * 100 }}% </div>
+          <div class="tag"> {{ (item.miss * 100).toFixed(0) }}% </div>
         </div>
       </div>
       <div class="flex justify-between">
@@ -27,7 +27,13 @@
           <div class="tag"> {{ getMaterialInfo(item).quantity }} </div>
         </div>
       </div>
-      <div class="tool"></div>
+      <div class="tool">
+        <ul v-if="item.imgs" class="flex gc-4 h-100 w-100 px-12">
+          <li v-for="(m, n) in item.imgs" :key="n" class="flex flex-s">
+            <img :src="m" width="24" />
+          </li>
+        </ul>
+      </div>
       <div class="allow button relative" @click="dig(item)">
         <button> 开采 </button>
       </div>
@@ -37,11 +43,12 @@
 
 <script setup lang="ts">
   import tree from '@/assets/stage/tree.webp';
-  import { getMaterial } from '@/store/modules/backpack/utils';
+  import { getMaterial, getBackpack } from '@/store/modules/backpack/utils';
   import { Material } from '@/store/modules/backpack/types';
+  import { computed } from 'vue';
   import { AddventureType } from './addventure';
 
-  defineProps<{
+  const props = defineProps<{
     data: AddventureType[];
   }>();
 
@@ -65,16 +72,35 @@
       item.tips = false;
     }, 500);
   };
+
   /* 开采/挖掘 */
   const dig = (item: AddventureType) => {
     getTips(item);
   };
-  /* 合并装备属性 */
-  const merge = (item) => {};
+
   const getMaterialInfo = (item: AddventureType) => {
     const meterialInfo = getMaterial();
     return meterialInfo[item.flag];
   };
+
+  const comData = computed(() => {
+    const backpack = getBackpack();
+    return props.data.map((e) => {
+      e.imgs = [];
+      e.tools.forEach((m) => {
+        backpack.data.forEach((v) => {
+          if (m === v.flag && v.total > 0) {
+            // eslint-disable-next-line no-restricted-syntax, guard-for-in
+            for (const key in v.effect) {
+              e[key] += v.effect[key];
+            }
+            e.imgs.push(v.src);
+          }
+        });
+      });
+      return e;
+    });
+  });
 </script>
 
 <style lang="scss" scoped>
