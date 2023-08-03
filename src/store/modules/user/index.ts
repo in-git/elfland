@@ -3,7 +3,10 @@ import { Hero } from './types';
 
 const useUserStore = defineStore('user', {
   state: (): Hero => ({
-    username: undefined,
+    username: '',
+    defense: 0,
+    attack: 0,
+    money: 0,
   }),
   persist: true,
 });

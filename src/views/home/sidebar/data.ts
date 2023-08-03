@@ -27,15 +27,19 @@ const list: GameStageList[] = [
         data: [],
       },
       {
-        name: '夏朝 ',
+        name: '农业文明 ',
         data: [],
       },
       {
-        name: '商朝 ',
+        name: '工业革命 ',
         data: [],
       },
       {
-        name: '周朝 ',
+        name: '智能世纪 ',
+        data: [],
+      },
+      {
+        name: '超能源世纪 ',
         data: [],
       },
     ],

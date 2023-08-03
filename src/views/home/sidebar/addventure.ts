@@ -13,7 +13,6 @@ export interface AddventureType {
   name: string;
   /* 标识，和背包或者其他地方对应 */
   flag: string;
-
   /* 用于一些自定义的提示,这类属性自定义即可 */
   [key: string]: any;
 }

@@ -14,3 +14,11 @@ export interface GameStageList {
   /* 对应的组件 */
   component?: Component;
 }
+export interface Commodity {
+  name: string;
+  price: number;
+  /* 描述信息 */
+  desc: string[];
+  /* 商品图片 */
+  src: string;
+}

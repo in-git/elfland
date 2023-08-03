@@ -1,9 +1,11 @@
 import { storeToRefs } from 'pinia';
 import { Ref } from 'vue';
-import backpackStore from './backpack';
-import { Backpack } from './types';
+import { Backpack, Material } from '@/store/modules/backpack/types';
+import { backpackStore, materialStore } from './backpack';
 
-// eslint-disable-next-line import/prefer-default-export
-export const getBackpack = (): Backpack => {
+export const getMaterial = (): Material => {
+  return materialStore();
+};
+export const getBackpack = () => {
   return backpackStore();
 };

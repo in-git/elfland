@@ -5,31 +5,40 @@
       <li class="flex justify-between">
         <span>木头</span>
         <div class="flex">
-          <span>{{ backpack.woods }}</span>
-          <SwapVue>
-            <i class="bi-arrow-left-right bi"></i>
+          <span class="px-8">{{ material.woods.quantity }}</span>
+          <SwapVue :material="material.woods" name="woods">
+            <span class="sale-button">
+              <i class="bi-arrow-left-right bi"></i>
+            </span>
           </SwapVue>
         </div>
       </li>
       <li class="flex justify-between">
         <span>石头</span>
-        <span>{{ backpack.stone }}</span>
+        <div class="flex">
+          <span class="px-8">{{ material.stone.quantity }}</span>
+          <SwapVue :material="material.woods" name="woods">
+            <span class="sale-button">
+              <i class="bi-arrow-left-right bi"></i>
+            </span>
+          </SwapVue>
+        </div>
       </li>
       <li class="flex justify-between">
         <span>鱼</span>
-        <span>{{ backpack.fish }}</span>
+        <span>{{ material.fish.quantity }}</span>
       </li>
       <li class="flex justify-between">
         <span>铁</span>
-        <span>{{ backpack.iron }}</span>
+        <span>{{ material.iron.quantity }}</span>
       </li>
       <li class="flex justify-between">
         <span>铜</span>
-        <span>{{ backpack.copper }}</span>
+        <span>{{ material.copper.quantity }}</span>
       </li>
       <li class="flex justify-between">
         <span>铁</span>
-        <span>{{ backpack.gold }}</span>
+        <span>{{ material.gold.quantity }}</span>
       </li>
     </ul>
   </div>
@@ -37,11 +46,11 @@
 
 <script setup lang="ts">
   import { computed } from 'vue';
-  import { getBackpack } from '@/store/modules/backpack/utils';
+  import { getMaterial } from '@/store/modules/backpack/utils';
   import SwapVue from './components/Swap.vue';
 
-  const backpack = computed(() => {
-    return getBackpack();
+  const material = computed(() => {
+    return getMaterial();
   });
 </script>
 
@@ -50,6 +59,20 @@
     background-color: #f8f8f8;
     li {
       line-height: 32px;
+      &:hover {
+        .sale-button {
+          background-color: #333;
+          i {
+            color: white;
+          }
+        }
+      }
     }
+  }
+  .sale-button {
+    width: 24px;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
   }
 </style>

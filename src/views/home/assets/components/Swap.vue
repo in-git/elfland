@@ -4,7 +4,11 @@
       <div class="cursor-pointer" @click="show = true">
         <slot></slot>
       </div>
-      <div v-if="show" class="input absolute r-0 flex flex-col gr-4">
+      <div
+        v-if="show"
+        ref="target"
+        class="input absolute r-0 flex flex-col gr-4"
+      >
         <div class="flex justify-between">
           <span>兑换</span>
           <i
@@ -12,7 +16,13 @@
             @click="show = false"
           ></i>
         </div>
-        <input type="text" placeholder="输入要兑换的数量" />
+        <input
+          v-model="quantity"
+          type="number"
+          placeholder="输入要兑换的数量"
+          :min="0"
+          @keydown.enter="comfirm"
+        />
         <div class="flex gc-8">
           <div>汇率</div>
           <div>
@@ -24,8 +34,8 @@
             </div>
           </div>
         </div>
-        <div class="comfirm">
-          <button>确定</button>
+        <div class="comfirm" @click="comfirm">
+          <button>卖掉</button>
         </div>
       </div>
     </div>
@@ -34,18 +44,36 @@
 
 <script setup lang="ts">
   import { onMounted, onUnmounted, ref } from 'vue';
+  import { onClickOutside } from '@vueuse/core';
+  import { MaterialItem } from '@/store/modules/backpack/types';
+  import { getUserInfo } from '@/store/modules/user/utils';
+  import { getMaterial } from '@/store/modules/backpack/utils';
 
+  const props = defineProps<{
+    material: MaterialItem;
+    name: string;
+  }>();
   const show = ref(false);
+  const target = ref();
+  const quantity = ref(0);
 
-  document.onmousedown = (e) => {
-    const target = e.target as HTMLElement;
-    if (!target.closest('.swap')) {
+  const comfirm = () => {
+    if (quantity.value > props.material.quantity || quantity.value < 0) {
+      quantity.value = 0;
       show.value = false;
+      return;
     }
+    const userInfo = getUserInfo();
+
+    userInfo.money += quantity.value * props.material.exchangeRatio;
+    const backpack = getMaterial();
+    backpack[props.name].quantity -= quantity.value;
+    quantity.value = 0;
+    show.value = false;
   };
 
-  onUnmounted(() => {
-    document.onmousedown = null;
+  onClickOutside(target, () => {
+    show.value = false;
   });
 </script>
 
@@ -56,6 +84,7 @@
     background-color: #eee;
     padding: 8px;
     line-height: initial;
+    z-index: 10;
     box-shadow: 0 0 5px #a3a3a3a4;
     input {
       width: 100%;
@@ -73,9 +102,11 @@
       background-color: #eee;
       display: inline-block;
       width: fit-content;
-      color: #333;
-      border: 1px dashed #000;
+      border: 1px dashed var(--warning);
       padding: 0 8px;
+      button {
+        color: var(--warning);
+      }
     }
   }
 </style>

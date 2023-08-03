@@ -1,20 +1,20 @@
 <template>
-  <div class="attribute px-12 py-8 flex flex-col gr-12">
+  <div class="attribute py-8 flex flex-col gr-12">
     <div class="hero-style p-12 text-center flex flex-col gr-4">
       <img :src="elf" class="w-100" />
-      <div class="username">一如既往</div>
-      <div class="flex justify-between">
+      <div class="username py-4">{{ info.username || '匿名' }}</div>
+      <div class="flex justify-between gc-4">
         <div class="info inline-flex gc-2 py-4 px-8">
           <i class="bi bi-currency-dollar"></i>
-          <div class="tag">120</div>
+          <div class="tag">{{ info.money }}</div>
         </div>
         <div class="info">
           <i class="bi bi-shield"></i>
-          <div class="tag">0</div>
+          <div class="tag">{{ info.defense }}</div>
         </div>
         <div class="info inline-flex gc-2 py-4 px-8">
           <i class="bi bi-screwdriver"></i>
-          <div class="tag">120</div>
+          <div class="tag">{{ info.attack }}</div>
         </div>
       </div>
     </div>
@@ -23,13 +23,18 @@
 </template>
 
 <script setup lang="ts">
+  import { computed } from 'vue';
   import elf from '@/assets/hero/elf-girl.webp';
+  import { getUserInfo } from '@/store/modules/user/utils';
   import AsstesVue from './assets/Asstes.vue';
+
+  const info = computed(() => {
+    return getUserInfo();
+  });
 </script>
 
 <style lang="scss" scoped>
   .attribute {
-    width: 300px;
     background-color: white;
     border-radius: var(--radius);
     img {
@@ -49,6 +54,8 @@
     display: inline-flex;
     padding: 4px 8px;
     column-gap: 4px;
+    justify-content: space-between;
+    flex: 1;
     .tag {
       background-color: #333;
       color: white;

@@ -9,11 +9,14 @@
         <img :src="tree" width="120" />
       </div>
       <div class="flex justify-between">
-        <div class="flex gc-4">
+        <div
+          class="flex gc-4"
+          :class="[item.tips === 'success' ? 'success' : '']"
+        >
           <div>效率</div>
           <div class="tag"> +{{ item.accumulative }} </div>
         </div>
-        <div class="flex gc-4">
+        <div class="flex gc-4" :class="[item.tips === 'miss' ? 'miss' : '']">
           <div>Miss</div>
           <div class="tag"> {{ item.miss * 100 }}% </div>
         </div>
@@ -22,9 +25,6 @@
       <div class="tool"></div>
       <div class="allow button relative" @click="dig(item)">
         <button> 开采 </button>
-        <div v-if="item.tips" :class="[item.status]" class="dig-tips">
-          {{ item.content }}
-        </div>
       </div>
     </div>
   </div>
@@ -32,8 +32,8 @@
 
 <script setup lang="ts">
   import tree from '@/assets/stage/tree.webp';
-  import { getBackpack } from '@/store/modules/backpack/utils';
-  import { Backpack } from '@/store/modules/backpack/types';
+  import { getMaterial } from '@/store/modules/backpack/utils';
+  import { Material } from '@/store/modules/backpack/types';
   import { AddventureType } from './addventure';
 
   const props = defineProps<{
@@ -44,15 +44,14 @@
 
   /* 处理提示相关的信息 */
   const getTips = (item: AddventureType) => {
-    const backpack: Backpack = getBackpack();
-    item.tips = true;
+    const backpack: Material = getMaterial();
+
     /* Miss处理 */
     if (Math.random() < item.miss) {
-      item.status = 'miss';
-      item.content = 'Miss';
+      item.tips = 'miss';
     } else {
-      item.status = 'success';
-      backpack[item.flag] += item.accumulative;
+      item.tips = 'success';
+      backpack[item.flag].quantity += item.accumulative;
       item.content = `+${item.accumulative}`;
     }
     /* 提示 */
@@ -103,30 +102,20 @@
       }
     }
   }
-  .dig-tips {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    text-align: center;
-
-    padding: 0 4px;
-    animation: float-to-top 0.02s;
-  }
-  @keyframes float-to-top {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
   .success {
-    background-color: green;
+    background-color: var(--success);
     color: white;
+    .tag {
+      background-color: var(--success);
+      color: white;
+    }
   }
   .miss {
-    background-color: #ff0808;
+    background-color: var(--warning);
     color: white;
+    .tag {
+      background-color: var(--warning);
+      color: white;
+    }
   }
 </style>

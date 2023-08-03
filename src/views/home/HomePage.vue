@@ -1,15 +1,19 @@
 <template>
   <div class="flex home-page gc-8">
+    <!-- 左边菜单 -->
     <SidebarVue />
+    <!-- 中间的主界面 -->
     <MainVue />
-    <AttributeVue />
+
+    <!-- 资源集合 -->
+    <WorldAssets />
   </div>
 </template>
 
 <script setup lang="ts">
   import SidebarVue from './Sidebar.vue';
   import MainVue from './Main.vue';
-  import AttributeVue from './Assets.vue';
+  import WorldAssets from './WorldAssets.vue';
 </script>
 
 <style lang="scss" scoped>

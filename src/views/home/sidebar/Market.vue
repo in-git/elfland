@@ -1,26 +1,52 @@
 <template>
   <div class="market h-100 p-12">
     <div class="grid container">
-      <div class="market-card flex justify-between flex-col">
+      <div
+        v-for="(item, key) in data"
+        :key="key"
+        class="market-card flex justify-between flex-col"
+      >
         <div class="flex intro-image w-100 relative">
-          <img :src="pickaxe" />
+          <img :src="item.src" />
           <ul class="absolute cursor-pointer text-left">
             <li class="text-14 mb-12">说明</li>
-            <li>增加50%的成功率</li>
-            <li>增加50%的成功率</li>
-            <li>增加50%的成功率</li>
+            <li v-for="(m, n) in item.desc" :key="n">{{ m }}</li>
           </ul>
-          <div class="absolute r-0 b-0">
-            <i class="bi bi-info-circle"></i>
+          <div class="absolute select flex flex-s">
+            <i class="bi bi-eye"></i>
           </div>
         </div>
         <div>
-          <div class="text-24 text-bold"> 镐 </div>
-          <div class="price"> 60$ </div>
+          <div class="text-24 text-bold"> {{ item.name }} </div>
+          <div class="price"> {{ item.price }}$ </div>
         </div>
 
-        <div class="buy py-2">
+        <div class="buy py-4" @click="buy(item)">
           <button>购买</button>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="alertWindow.show" class="alert p-24 flex flex-col">
+      <div class="text-32 flex justify-between">
+        <div
+          >支付成功
+          <i class="bi bi-check-circle-fill" style="color: var(--success)"></i
+        ></div>
+        <i
+          class="bi bi-x-circle-fill text-16 cursor-pointer"
+          @click="alertWindow.show = false"
+        ></i>
+      </div>
+      <div class="desc flex-1 flex flex-s">
+        <div class="text-center flex flex-col gr-8">
+          <div class="text-20 text-999">恭喜获得物品</div>
+          <div class="text-36">
+            {{ alertWindow.name }} <span class="text-12">x1</span></div
+          >
+          <div class="close text-16" @click="alertWindow.show = false">
+            确定
+          </div>
         </div>
       </div>
     </div>
@@ -28,7 +54,49 @@
 </template>
 
 <script setup lang="ts">
-  import pickaxe from '@/assets/market/pickaxe.png';
+  import { ref } from 'vue';
+
+  import { getUserInfo } from '@/store/modules/user/utils';
+  import { getBackpack } from '@/store/modules/backpack/utils';
+  import { Commodity } from '../types';
+
+  defineProps<{
+    data: Commodity[];
+  }>();
+  const alertWindow = ref({
+    show: false,
+    name: '',
+    status: false,
+  });
+  const buy = (item: Commodity) => {
+    const userInfo = getUserInfo();
+    if (userInfo.money > item.price) {
+      userInfo.money -= item.price;
+      alertWindow.value.show = true;
+      alertWindow.value.name = item.name;
+      const backpack = getBackpack();
+      /*
+        判断是否已经购买
+            是:修改数量
+            否:添加元素
+       */
+      const index = backpack.data.findIndex((e) => e.name === item.name);
+      if (index > -1) {
+        backpack.data[index].total += 1;
+      } else {
+        backpack.data.push({
+          name: item.name,
+          src: item.src,
+          /* 降价出售逻辑 */
+          sellingPrice: item.price * 0.8,
+          total: 1,
+        });
+      }
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('你暂时还买不起,赶快去砍木头吧');
+    }
+  };
 </script>
 
 <style lang="scss" scoped>
@@ -36,8 +104,8 @@
     background-color: var(--background-color);
 
     .container {
-      grid-template-columns: repeat(auto-fit, minmax(160px, 0.1fr));
-      grid-template-rows: repeat(auto-fit, 230px);
+      grid-template-columns: repeat(auto-fit, minmax(200px, 0.1fr));
+      grid-template-rows: repeat(auto-fit, 240px);
       gap: 8px;
       overflow-y: auto;
       font-size: 12px;
@@ -66,9 +134,6 @@
       flex-shrink: 0;
       height: 120px;
       &:hover {
-        img {
-          opacity: 0;
-        }
         ul {
           opacity: 1;
         }
@@ -77,10 +142,11 @@
         object-fit: contain;
         width: 100%;
         opacity: 1;
+        filter: brightness(96%);
       }
     }
     ul {
-      background-color: #333;
+      background-color: rgba(51, 51, 51, 0.856);
       padding: 8px;
       opacity: 0;
       flex-shrink: 0;
@@ -93,5 +159,25 @@
         white-space: nowrap;
       }
     }
+  }
+  .alert {
+    position: fixed;
+    width: 600px;
+    height: 400px;
+    background-color: #eee;
+    left: calc(50% - 300px);
+    top: calc(50% - 200px);
+    box-shadow: 0 0 25px gray;
+  }
+  .close {
+    background: var(--success, #00b42a);
+    height: 32px;
+    line-height: 32px;
+    color: white;
+  }
+  .select {
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 </style>
