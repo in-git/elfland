@@ -41,12 +41,12 @@
 <script setup lang="ts">
   import { ref, onMounted } from 'vue';
   import { onClickOutside } from '@vueuse/core';
-  import { MaterialItem } from '@/store/modules/backpack/types';
+  import { Material } from '@/store/modules/backpack/types';
   import { getUserInfo } from '@/store/modules/user/utils';
-  import { getMaterial } from '@/store/modules/backpack/utils';
+  import { getMaterial, getMaterialById } from '@/store/modules/backpack/utils';
 
   const props = defineProps<{
-    material: MaterialItem;
+    material: Material;
     name: string;
   }>();
   const show = ref(false);
@@ -65,9 +65,10 @@
     }
     const userInfo = getUserInfo();
 
-    userInfo.money += Math.ceil(quantity.value * props.material.price);
-    const backpack = getMaterial();
-    backpack[props.name].quantity -= quantity.value;
+    userInfo.money += parseInt(`${quantity.value * props.material.price}`, 10);
+    const material = getMaterialById(props.name);
+    if (!material) return;
+    material.quantity -= quantity.value;
     quantity.value = 0;
     show.value = false;
   };

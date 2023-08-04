@@ -37,7 +37,6 @@
 
   const getSkin = () => {
     const info = getUserInfo();
-    console.log(info.skin);
 
     return info.skin || elf;
   };

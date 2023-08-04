@@ -28,17 +28,6 @@ const market: CommodityList[] = [
           accumulative: 2,
         },
       },
-      {
-        name: '镐',
-        price: 200,
-        desc: ['降低Miss概率20%', '效率+1'],
-        src: pickaxe,
-        flag: 'stone',
-        effect: {
-          miss: 0.35,
-          accumulative: 2,
-        },
-      },
     ],
     component: markRaw(Market),
   },

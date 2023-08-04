@@ -32,9 +32,10 @@
     const userInfo = getUserInfo();
     const { money } = userInfo;
     if (money > item.price) {
-      //   userInfo.money = -item.price;
+      userInfo.money = -item.price;
       userInfo.skin = item.src;
     } else {
+      // eslint-disable-next-line no-alert
       alert('少侠你的盘缠不够了！');
     }
   };

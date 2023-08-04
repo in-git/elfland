@@ -1,5 +1,5 @@
-export interface MaterialItem {
-  /* 数量 */
+/* 背包 */
+export interface Material {
   quantity: number;
   /* 汇率 */
   price: number;
@@ -9,15 +9,7 @@ export interface MaterialItem {
   /* 开采效率 */
   accumulative: number;
   ban: boolean;
-}
-/* 背包 */
-export interface Material {
-  woods: MaterialItem;
-  stone: MaterialItem;
-  fish: MaterialItem;
-  iron: MaterialItem;
-  copper: MaterialItem;
-  gold: MaterialItem;
+  id: string;
   [key: string]: any;
 }
 

@@ -27,17 +27,7 @@
       </div>
     </div>
 
-    <div v-if="alertWindow.show" class="alert p-24 flex flex-col">
-      <div class="text-32 flex justify-between">
-        <div
-          >支付成功
-          <i class="bi bi-check-circle-fill" style="color: var(--success)"></i
-        ></div>
-        <i
-          class="bi bi-x-circle-fill text-16 cursor-pointer"
-          @click="alertWindow.show = false"
-        ></i>
-      </div>
+    <ElfPay v-model:show="alertWindow.show">
       <div class="desc flex-1 flex flex-s">
         <div class="text-center flex flex-col gr-8">
           <div class="text-20 text-999">恭喜获得物品</div>
@@ -52,15 +42,15 @@
           </div>
         </div>
       </div>
-    </div>
+    </ElfPay>
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
-
+  import ElfPay from '@/components/pay/ElfPay.vue';
   import { getUserInfo } from '@/store/modules/user/utils';
-  import { getBackpack, getMaterial } from '@/store/modules/backpack/utils';
+  import { getMaterialById } from '@/store/modules/backpack/utils';
   import { Commodity } from '../types';
 
   defineProps<{
@@ -78,30 +68,10 @@
       userInfo.money -= item.price;
       alertWindow.value.show = true;
       alertWindow.value.name = item.name;
-      const backpack = getBackpack();
-      /*
-        判断是否已经购买
-            是:修改数量
-            否:添加元素
-       */
-      const index = backpack.data.findIndex((e) => e.name === item.name);
-      if (index > -1) {
-        backpack.data[index].total += 1;
-      } else {
-        backpack.data.push({
-          name: item.name,
-          src: item.src,
-          /* 降价出售逻辑 */
-          sellingPrice: item.price * 0.8,
-          total: 1,
-          flag: item.flag,
-          effect: item.effect,
-        });
-      }
-      const meterialInfo = getMaterial();
+      const meterialInfo: any = getMaterialById(item.flag);
       // eslint-disable-next-line no-restricted-syntax, guard-for-in
       for (const key in item.effect) {
-        meterialInfo[item.flag][key] = item.effect[key];
+        meterialInfo[key] = item.effect[key];
       }
     } else {
       // eslint-disable-next-line no-alert

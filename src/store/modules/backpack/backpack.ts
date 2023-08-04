@@ -2,56 +2,62 @@ import { defineStore } from 'pinia';
 import { Backpack, Material } from '@/store/modules/backpack/types';
 
 const materialStore = defineStore('material', {
-  state: (): Material => ({
-    woods: {
+  state: (): Material[] => [
+    {
       price: 0.1,
       quantity: 0,
       name: '木头',
       miss: 0.5,
       accumulative: 1,
       ban: false,
+      id: 'woods',
     },
-    stone: {
+    {
       price: 0.5,
       quantity: 0,
       name: '石头',
       miss: 0.55,
       accumulative: 1,
-      ban: false,
+      ban: true,
+      id: 'stone',
     },
-    copper: {
+    {
       price: 2,
       quantity: 0,
       name: '铜',
       miss: 0.65,
       accumulative: 1,
       ban: true,
+      id: 'copper',
     },
-    fish: {
+    {
       price: 0.75,
       quantity: 0,
       name: '鱼',
       miss: 0.75,
       accumulative: 1,
       ban: true,
+      id: 'fish',
     },
-    iron: {
+    {
       price: 100,
       quantity: 0,
       name: '铁',
       miss: 0.8,
       accumulative: 1,
       ban: true,
+      id: 'iron',
     },
-    gold: {
+    {
       price: 180,
       quantity: 0,
       name: '金子',
       miss: 0.89,
       accumulative: 1,
       ban: true,
+      id: 'gold',
     },
-  }),
+  ],
   persist: true,
 });
 const backpackStore = defineStore('backpack', {

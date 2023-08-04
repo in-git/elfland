@@ -1,7 +1,7 @@
 import { markRaw } from 'vue';
 import { GameStageList } from '../types';
 import addventureList from './data/addventure';
-import CiviliztionVue from './Civilization.vue';
+import PrimitiveSociety from './PrimitiveSociety.vue';
 import market from './data/market';
 
 const list: GameStageList[] = [
@@ -18,24 +18,19 @@ const list: GameStageList[] = [
     list: [
       {
         name: '原始社会 ',
-        data: [],
-        component: markRaw(CiviliztionVue),
+        component: markRaw(PrimitiveSociety),
       },
       {
         name: '农业文明 ',
-        data: [],
       },
       {
         name: '工业革命 ',
-        data: [],
       },
       {
         name: '智能世纪 ',
-        data: [],
       },
       {
         name: '超能源世纪 ',
-        data: [],
       },
     ],
   },

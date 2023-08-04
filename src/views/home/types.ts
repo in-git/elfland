@@ -3,7 +3,6 @@ import { Component } from 'vue';
 export interface GameStage {
   /* 场景的名字 */
   name: string;
-  data: any[];
   component?: Component;
 }
 

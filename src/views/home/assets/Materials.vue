@@ -3,56 +3,15 @@
     <h6 class="my-12">资源</h6>
 
     <ul class="content px-12 relative">
-      <li class="flex justify-between">
-        <span>木头</span>
+      <li
+        v-for="(item, key) in materialList"
+        :key="key"
+        class="flex justify-between"
+      >
+        <span>{{ item.name }}</span>
         <div class="flex">
-          <span class="px-8">{{ material.woods.quantity }}</span>
-          <SwapVue :material="material.woods" name="woods">
-            <span class="sale-button"> 卖出 </span>
-          </SwapVue>
-        </div>
-      </li>
-      <li class="flex justify-between">
-        <span>石头</span>
-        <div class="flex">
-          <span class="px-8">{{ material.stone.quantity }}</span>
-          <SwapVue :material="material.stone" name="stone">
-            <span class="sale-button"> 卖出 </span>
-          </SwapVue>
-        </div>
-      </li>
-      <li class="flex justify-between">
-        <span>鱼</span>
-        <div class="flex">
-          <span class="px-8">{{ material.fish.quantity }}</span>
-          <SwapVue :material="material.fish" name="fish">
-            <span class="sale-button"> 卖出 </span>
-          </SwapVue>
-        </div>
-      </li>
-      <li class="flex justify-between">
-        <span>铁</span>
-        <div class="flex">
-          <span class="px-8">{{ material.iron.quantity }}</span>
-          <SwapVue :material="material.iron" name="iron">
-            <span class="sale-button"> 卖出 </span>
-          </SwapVue>
-        </div>
-      </li>
-      <li class="flex justify-between">
-        <span>铜</span>
-        <div class="flex">
-          <span class="px-8">{{ material.copper.quantity }}</span>
-          <SwapVue :material="material.copper" name="copper">
-            <span class="sale-button"> 卖出 </span>
-          </SwapVue>
-        </div>
-      </li>
-      <li class="flex justify-between">
-        <span>金</span>
-        <div class="flex">
-          <span class="px-8">{{ material.gold.quantity }}</span>
-          <SwapVue :material="material.gold" name="gold">
+          <span class="px-8">{{ item.quantity }}</span>
+          <SwapVue :material="item" :name="item.id">
             <span class="sale-button"> 卖出 </span>
           </SwapVue>
         </div>
@@ -64,9 +23,10 @@
 <script setup lang="ts">
   import { computed } from 'vue';
   import { getMaterial } from '@/store/modules/backpack/utils';
+  import { Material } from '@/store/modules/backpack/types';
   import SwapVue from './components/Swap.vue';
 
-  const material = computed(() => {
+  const materialList = computed((): Material[] => {
     return getMaterial();
   });
 </script>
