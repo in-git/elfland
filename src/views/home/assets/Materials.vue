@@ -7,9 +7,7 @@
         <div class="flex">
           <span class="px-8">{{ material.woods.quantity }}</span>
           <SwapVue :material="material.woods" name="woods">
-            <span class="sale-button">
-              <i class="bi-arrow-left-right bi"></i>
-            </span>
+            <span class="sale-button"> 卖出 </span>
           </SwapVue>
         </div>
       </li>
@@ -18,27 +16,45 @@
         <div class="flex">
           <span class="px-8">{{ material.stone.quantity }}</span>
           <SwapVue :material="material.stone" name="stone">
-            <span class="sale-button">
-              <i class="bi-arrow-left-right bi"></i>
-            </span>
+            <span class="sale-button"> 卖出 </span>
           </SwapVue>
         </div>
       </li>
       <li class="flex justify-between">
         <span>鱼</span>
-        <span>{{ material.fish.quantity }}</span>
+        <div class="flex">
+          <span class="px-8">{{ material.fish.quantity }}</span>
+          <SwapVue :material="material.fish" name="fish">
+            <span class="sale-button"> 卖出 </span>
+          </SwapVue>
+        </div>
       </li>
       <li class="flex justify-between">
         <span>铁</span>
-        <span>{{ material.iron.quantity }}</span>
+        <div class="flex">
+          <span class="px-8">{{ material.iron.quantity }}</span>
+          <SwapVue :material="material.iron" name="iron">
+            <span class="sale-button"> 卖出 </span>
+          </SwapVue>
+        </div>
       </li>
       <li class="flex justify-between">
         <span>铜</span>
-        <span>{{ material.copper.quantity }}</span>
+        <div class="flex">
+          <span class="px-8">{{ material.copper.quantity }}</span>
+          <SwapVue :material="material.copper" name="copper">
+            <span class="sale-button"> 卖出 </span>
+          </SwapVue>
+        </div>
       </li>
       <li class="flex justify-between">
-        <span>铁</span>
-        <span>{{ material.gold.quantity }}</span>
+        <span>金</span>
+        <div class="flex">
+          <span class="px-8">{{ material.gold.quantity }}</span>
+          <SwapVue :material="material.gold" name="gold">
+            <span class="sale-button"> 卖出 </span>
+          </SwapVue>
+        </div>
       </li>
     </ul>
   </div>
@@ -62,15 +78,14 @@
       &:hover {
         .sale-button {
           background-color: #333;
-          i {
-            color: white;
-          }
+          color: white;
         }
       }
     }
   }
   .sale-button {
-    width: 24px;
+    width: fit-content;
+    padding: 0 4px;
     display: inline-block;
     text-align: center;
     line-height: 20px;

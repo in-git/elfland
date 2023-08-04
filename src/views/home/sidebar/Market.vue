@@ -62,7 +62,6 @@
   import { getUserInfo } from '@/store/modules/user/utils';
   import { getBackpack, getMaterial } from '@/store/modules/backpack/utils';
   import { Commodity } from '../types';
-  import { AddventureType } from './data/addventure';
 
   defineProps<{
     data: Commodity[];
@@ -73,13 +72,9 @@
     status: false,
   });
 
-  const getMaterialInfo = (flag: string) => {
-    const meterialInfo = getMaterial();
-    return meterialInfo[flag];
-  };
   const buy = (item: Commodity) => {
     const userInfo = getUserInfo();
-    if (userInfo.money > item.price) {
+    if (userInfo.money >= item.price) {
       userInfo.money -= item.price;
       alertWindow.value.show = true;
       alertWindow.value.name = item.name;

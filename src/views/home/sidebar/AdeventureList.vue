@@ -4,6 +4,7 @@
       v-for="(item, key) in data"
       :key="key"
       class="card px-12 py-4 flex flex-col gr-4 justify-between"
+      :class="[getMaterialInfo(item).ban ? 'ban' : 'allow']"
     >
       <div class="text-center relative">
         <img :src="item.src" width="120" />
@@ -32,11 +33,13 @@
         </div>
         <div class="flex">
           <div>单价</div>
-          <div class="tag">{{ getMaterialInfo(item).exchangeRatio }}</div>
+          <div class="tag">{{ getMaterialInfo(item).price }}</div>
         </div>
       </div>
-      <div class="allow button relative" @click="dig(item)">
-        <button> 开采 </button>
+      <div class="button relative">
+        <button :disabled="getMaterialInfo(item).ban" @click="dig(item)">
+          开采
+        </button>
       </div>
     </div>
   </div>
@@ -108,16 +111,28 @@
       background-color: #f8f8f8;
     }
     .allow {
-      background-color: #6fc082;
+      .button {
+        background-color: #6fc082;
+      }
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+    .ban {
+      .button {
+        background-color: var(--warning);
+      }
+      filter: grayscale(60%);
+      opacity: 0.4;
+      button {
+        cursor: not-allowed;
+      }
     }
     .button,
     button {
       height: 24px;
       line-height: 24px;
       color: white;
-      &:active {
-        transform: translateY(1px);
-      }
     }
   }
   .success {

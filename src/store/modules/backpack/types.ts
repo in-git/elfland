@@ -2,12 +2,13 @@ export interface MaterialItem {
   /* 数量 */
   quantity: number;
   /* 汇率 */
-  exchangeRatio: number;
+  price: number;
   /* 材料的名字 */
   name: string;
   miss: number;
   /* 开采效率 */
   accumulative: number;
+  ban: boolean;
 }
 /* 背包 */
 export interface Material {
