@@ -1,7 +1,7 @@
 <template>
   <div class="adventrue-list h-100 p-12">
     <div
-      v-for="(item, key) in comData"
+      v-for="(item, key) in data"
       :key="key"
       class="card px-12 py-4 flex flex-col gr-4 justify-between"
     >
@@ -14,25 +14,26 @@
           :class="[item.tips === 'success' ? 'success' : '']"
         >
           <div>效率</div>
-          <div class="tag"> +{{ item.accumulative }} </div>
+          <div class="tag"> +{{ getMaterialInfo(item).accumulative }} </div>
         </div>
         <div class="flex gc-4" :class="[item.tips === 'miss' ? 'miss' : '']">
           <div>Miss</div>
-          <div class="tag"> {{ item.miss * 100 }}% </div>
+          <div class="tag">
+            {{ parseInt(`${getMaterialInfo(item).miss * 100}`) }}%
+          </div>
         </div>
       </div>
       <div class="flex justify-between">
         <div class="flex gc-4">
           <div>{{ getMaterialInfo(item).name }}</div>
-          <div class="tag"> {{ getMaterialInfo(item).quantity }} </div>
+          <div class="tag">
+            {{ getMaterialInfo(item).quantity }}
+          </div>
         </div>
-      </div>
-      <div class="tool">
-        <ul v-if="item.imgs" class="flex gc-4 h-100 w-100 px-12">
-          <li v-for="(m, n) in item.imgs" :key="n" class="flex flex-s">
-            <img :src="m" width="24" />
-          </li>
-        </ul>
+        <div class="flex">
+          <div>单价</div>
+          <div class="tag">{{ getMaterialInfo(item).exchangeRatio }}</div>
+        </div>
       </div>
       <div class="allow button relative" @click="dig(item)">
         <button> 开采 </button>
@@ -42,11 +43,10 @@
 </template>
 
 <script setup lang="ts">
-  import tree from '@/assets/stage/tree.webp';
-  import { getMaterial, getBackpack } from '@/store/modules/backpack/utils';
+  import { getMaterial } from '@/store/modules/backpack/utils';
   import { Material } from '@/store/modules/backpack/types';
-  import { computed } from 'vue';
-  import { AddventureType } from './addventure';
+  // eslint-disable-next-line import/no-cycle
+  import { AddventureType } from './data/addventure';
 
   const props = defineProps<{
     data: AddventureType[];
@@ -54,17 +54,23 @@
 
   let clearFlag: any = 0;
 
+  const getMaterialInfo = (item: AddventureType) => {
+    const meterialInfo = getMaterial();
+    return meterialInfo[item.flag];
+  };
   /* 处理提示相关的信息 */
   const getTips = (item: AddventureType) => {
     const backpack: Material = getMaterial();
 
     /* Miss处理 */
-    if (Math.random() < item.miss) {
+
+    const material = getMaterialInfo(item);
+
+    if (Math.random() < material.miss) {
       item.tips = 'miss';
     } else {
       item.tips = 'success';
-      backpack[item.flag].quantity += item.accumulative;
-      item.content = `+${item.accumulative}`;
+      backpack[item.flag].quantity += material.accumulative;
     }
     /* 提示 */
     clearTimeout(clearFlag);
@@ -77,38 +83,14 @@
   const dig = (item: AddventureType) => {
     getTips(item);
   };
-
-  const getMaterialInfo = (item: AddventureType) => {
-    const meterialInfo = getMaterial();
-    return meterialInfo[item.flag];
-  };
-
-  const comData = computed(() => {
-    const backpack = getBackpack();
-    return props.data.map((e) => {
-      e.imgs = [];
-      e.tools.forEach((m) => {
-        backpack.data.forEach((v) => {
-          if (m === v.flag && v.total > 0) {
-            // eslint-disable-next-line no-restricted-syntax, guard-for-in
-            for (const key in v.effect) {
-              e[key] = v.effect[key];
-            }
-            e.imgs.push(v.src);
-          }
-        });
-      });
-      return e;
-    });
-  });
 </script>
 
 <style lang="scss" scoped>
   .adventrue-list {
     background-color: var(--background-color);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 0.2fr));
-    grid-template-rows: repeat(auto-fit, 260px);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 0.15fr));
+    grid-template-rows: repeat(auto-fit, 240px);
     gap: 8px;
     overflow-y: auto;
     font-size: 12px;

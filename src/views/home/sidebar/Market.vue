@@ -60,8 +60,9 @@
   import { ref } from 'vue';
 
   import { getUserInfo } from '@/store/modules/user/utils';
-  import { getBackpack } from '@/store/modules/backpack/utils';
+  import { getBackpack, getMaterial } from '@/store/modules/backpack/utils';
   import { Commodity } from '../types';
+  import { AddventureType } from './data/addventure';
 
   defineProps<{
     data: Commodity[];
@@ -71,6 +72,11 @@
     name: '',
     status: false,
   });
+
+  const getMaterialInfo = (flag: string) => {
+    const meterialInfo = getMaterial();
+    return meterialInfo[flag];
+  };
   const buy = (item: Commodity) => {
     const userInfo = getUserInfo();
     if (userInfo.money > item.price) {
@@ -93,9 +99,14 @@
           /* 降价出售逻辑 */
           sellingPrice: item.price * 0.8,
           total: 1,
-          effect: item.effect,
           flag: item.flag,
+          effect: item.effect,
         });
+      }
+      const meterialInfo = getMaterial();
+      // eslint-disable-next-line no-restricted-syntax, guard-for-in
+      for (const key in item.effect) {
+        meterialInfo[item.flag][key] = item.effect[key];
       }
     } else {
       // eslint-disable-next-line no-alert

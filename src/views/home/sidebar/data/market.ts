@@ -1,6 +1,6 @@
+import { Component, markRaw } from 'vue';
 import pickaxe from '@/assets/market/pickaxe.png';
 import axe from '@/assets/market/axe.png';
-import { Component, markRaw } from 'vue';
 import { Commodity } from '../../types';
 import Market from '../Market.vue';
 import Weapon from '../Weapon.vue';
@@ -17,12 +17,12 @@ const market: CommodityList[] = [
       {
         name: '斧头',
         price: 10,
-        desc: ['提高开采树木的效率', '降低miss几率40%'],
+        desc: ['提高开采树木的效率', '降低miss几率20%'],
         src: axe,
-        flag: 'axe',
+        flag: 'woods',
         effect: {
           /* miss几率 */
-          miss: 0.4,
+          miss: 0.2,
           /* 伐木效率 */
           accumulative: 2,
         },
@@ -32,9 +32,9 @@ const market: CommodityList[] = [
         price: 200,
         desc: ['降低Miss概率20%', '效率+1'],
         src: pickaxe,
-        flag: 'pickaxe',
+        flag: 'stone',
         effect: {
-          miss: 0.7,
+          miss: 0.35,
           accumulative: 2,
         },
       },

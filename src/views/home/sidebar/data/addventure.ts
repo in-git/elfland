@@ -1,5 +1,5 @@
-import { importAssets } from '@/utils/utils';
 import { Component, markRaw } from 'vue';
+import { importAssets } from '@/utils/utils';
 import AdeventureList from '../AdeventureList.vue';
 
 export interface AddventureType {
@@ -7,8 +7,6 @@ export interface AddventureType {
   price: number;
   /* 开采数量，可累加 */
   accumulative: number;
-  /* 开采丢失概率 */
-  miss: number;
   /* 对应的图片资源 */
   src: string;
   /* 名字 */
@@ -39,8 +37,7 @@ const addventureList: DataList[] = [
       {
         src: importAssets('stage/tree.webp'),
         name: '松树',
-        price: 1,
-        miss: 0.7,
+        price: 0.1,
         accumulative: 1,
         flag: 'woods',
         tools: ['axe'],
@@ -50,9 +47,17 @@ const addventureList: DataList[] = [
         src: importAssets('stage/stone.png'),
         name: '石头',
         price: 3,
-        miss: 0.9,
         accumulative: 1,
         flag: 'stone',
+        tools: ['pickaxe'],
+        condition: ['pickaxe'],
+      },
+      {
+        src: importAssets('stage/fish.png'),
+        name: '鱼',
+        price: 5,
+        accumulative: 1,
+        flag: 'fish',
         tools: ['pickaxe'],
         condition: ['pickaxe'],
       },

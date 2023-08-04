@@ -30,7 +30,7 @@
         <div class="flex gc-8">
           <div>价值</div>
           <div>
-            {{ material.exchangeRatio * quantity }}
+            {{ parseInt(`${material.exchangeRatio * quantity}`) }}
           </div>
         </div>
         <hr />
@@ -69,7 +69,7 @@
     }
     const userInfo = getUserInfo();
 
-    userInfo.money += quantity.value * props.material.exchangeRatio;
+    userInfo.money += Math.ceil(quantity.value * props.material.exchangeRatio);
     const backpack = getMaterial();
     backpack[props.name].quantity -= quantity.value;
     quantity.value = 0;

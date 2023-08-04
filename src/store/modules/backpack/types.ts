@@ -5,6 +5,9 @@ export interface MaterialItem {
   exchangeRatio: number;
   /* 材料的名字 */
   name: string;
+  miss: number;
+  /* 开采效率 */
+  accumulative: number;
 }
 /* 背包 */
 export interface Material {
