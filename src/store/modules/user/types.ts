@@ -4,4 +4,7 @@ export interface Hero {
   attack: number;
   defense: number;
   money: number;
+  hp: number;
+  /* 皮肤 */
+  skin: string;
 }

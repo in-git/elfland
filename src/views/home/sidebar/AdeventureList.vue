@@ -113,9 +113,9 @@
     .allow {
       .button {
         background-color: #6fc082;
-      }
-      &:active {
-        transform: translateY(1px);
+        &:active {
+          transform: translateY(1px);
+        }
       }
     }
     .ban {

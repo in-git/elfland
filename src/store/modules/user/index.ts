@@ -7,6 +7,8 @@ const useUserStore = defineStore('user', {
     defense: 0,
     attack: 0,
     money: 0,
+    hp: 100,
+    skin: '',
   }),
   persist: true,
 });

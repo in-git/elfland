@@ -53,6 +53,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .assets {
+    min-height: 360px;
+    overflow-y: auto;
+  }
   ul.nav-list {
     display: flex;
     background-color: var(--background-color);

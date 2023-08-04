@@ -4,6 +4,7 @@ import axe from '@/assets/market/axe.png';
 import { Commodity } from '../../types';
 import Market from '../Market.vue';
 import Weapon from '../Weapon.vue';
+import MakeupArtist from '../MakeupArtist.vue';
 
 export interface CommodityList {
   name: string;
@@ -40,6 +41,11 @@ const market: CommodityList[] = [
       },
     ],
     component: markRaw(Market),
+  },
+  {
+    name: '易容师 ',
+    data: [],
+    component: markRaw(MakeupArtist),
   },
   {
     name: '武器 ',
