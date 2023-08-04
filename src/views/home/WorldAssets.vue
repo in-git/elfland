@@ -1,6 +1,5 @@
 <template>
   <div v-if="showRightSidebar" class="attribute py-8 flex flex-col gr-12">
-    <AsstesVue />
     <div class="hero-style p-12 text-center flex flex-col gr-4">
       <img :src="getSkin()" class="w-100" />
       <div class="username py-4">{{ info.username || '匿名' }}</div>
@@ -25,12 +24,13 @@
         </div>
       </div>
     </div>
+    <AsstesVue />
   </div>
 </template>
 
 <script setup lang="ts">
   import { computed } from 'vue';
-  import elf from '@/assets/hero/elf-girl.webp';
+  import elf from '@/assets/hero/elfgirl.webp';
   import { getUserInfo } from '@/store/modules/user/utils';
   import AsstesVue from './assets/Asstes.vue';
   import { showRightSidebar } from './delivery';

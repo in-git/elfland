@@ -1,14 +1,10 @@
 <template>
   <div class="swap">
-    <div class="ml-4 relative">
+    <div class="ml-4">
       <div class="cursor-pointer" @click="openSwap">
         <slot></slot>
       </div>
-      <div
-        v-if="show"
-        ref="target"
-        class="input absolute r-0 flex flex-col gr-4"
-      >
+      <div v-if="show" ref="target" class="input absolute flex flex-col gr-4">
         <div class="flex justify-between">
           <span>兑换</span>
           <i
@@ -83,13 +79,14 @@
 
 <style lang="scss" scoped>
   .input {
-    top: 100%;
-    width: 140px;
+    top: 10%;
+    width: 80%;
     background-color: #eee;
     padding: 8px;
     line-height: initial;
     z-index: 10;
-    box-shadow: 0 0 5px #a3a3a3a4;
+    left: 10%;
+    box-shadow: 0 0 25px #5c5c5ca4;
     input {
       width: 100%;
       outline: none;

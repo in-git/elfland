@@ -1,7 +1,8 @@
 <template>
   <div>
     <h6 class="my-12">资源</h6>
-    <ul class="content px-12">
+
+    <ul class="content px-12 relative">
       <li class="flex justify-between">
         <span>木头</span>
         <div class="flex">
