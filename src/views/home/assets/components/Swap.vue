@@ -39,11 +39,11 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue';
+  import { ref } from 'vue';
   import { onClickOutside } from '@vueuse/core';
   import { Material } from '@/store/modules/backpack/types';
   import { getUserInfo } from '@/store/modules/user/utils';
-  import { getMaterial, getMaterialById } from '@/store/modules/backpack/utils';
+  import { getMaterialById } from '@/store/modules/backpack/utils';
 
   const props = defineProps<{
     material: Material;
