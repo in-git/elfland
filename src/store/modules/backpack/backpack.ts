@@ -51,7 +51,7 @@ const materialStore = defineStore('material', {
     {
       price: 180,
       quantity: 0,
-      name: '金子',
+      name: '金',
       miss: 0.89,
       accumulative: 1,
       ban: true,

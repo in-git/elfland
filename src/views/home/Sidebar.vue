@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
-  import data from './sidebar/data';
-  import { GameStage, GameStageList } from './types';
+  import data from './main/data';
+  import { GameStage } from './types';
   import { currentStage, showSidebar } from './delivery';
 
   const selectItem = (item: GameStage) => {

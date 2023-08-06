@@ -37,22 +37,22 @@ export const skinList: SkinType[] = [
   {
     src: skeb,
     name: 'skeb',
-    price: 1000,
+    price: 3000,
   },
   {
     src: yangweiyu,
     name: '央未雨',
-    price: 1000,
+    price: 3200,
   },
   {
     src: baihu,
     name: '百户',
-    price: 1000,
+    price: 4000,
   },
   {
     src: baizi,
     name: '白田',
-    price: 1000,
+    price: 4200,
   },
   {
     src: leibing,
@@ -62,42 +62,42 @@ export const skinList: SkinType[] = [
   {
     src: yunai,
     name: '雨赖',
-    price: 2000,
+    price: 7000,
   },
   {
     src: xixi,
     name: '兮兮',
-    price: 4800,
+    price: 7200,
   },
   {
     src: shuangzi,
     name: '双子',
-    price: 5200,
+    price: 10000,
   },
   {
     src: yichen,
     name: '依晨',
-    price: 5200,
+    price: 10200,
   },
   {
     src: viola,
     name: 'Viola',
-    price: 5200,
+    price: 14000,
   },
   {
     src: feiyan,
     name: '菲烟',
-    price: 13800,
+    price: 14800,
   },
   {
     src: keqing,
     name: '天晴',
-    price: 15800,
+    price: 24000,
   },
   {
     src: bingli,
     name: '冰粒',
-    price: 20000,
+    price: 28000,
   },
   {
     src: sky,

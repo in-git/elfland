@@ -5,6 +5,7 @@ import { Commodity } from '../../types';
 import Market from '../Market.vue';
 import Weapon from '../Weapon.vue';
 import MakeupArtist from '../MakeupArtist.vue';
+import GamebingVue from '../Gambling.vue';
 
 export interface CommodityList {
   name: string;
@@ -32,12 +33,17 @@ const market: CommodityList[] = [
     component: markRaw(Market),
   },
   {
-    name: '易容师 ',
+    name: '易容师',
     data: [],
     component: markRaw(MakeupArtist),
   },
   {
-    name: '武器 ',
+    name: '赌场',
+    data: [],
+    component: markRaw(GamebingVue),
+  },
+  {
+    name: '武器',
     data: [],
     component: markRaw(Weapon),
   },

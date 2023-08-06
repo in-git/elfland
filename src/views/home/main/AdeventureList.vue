@@ -1,7 +1,7 @@
 <template>
   <div class="adventrue-list h-100 p-12">
     <div
-      v-for="(item, key) in data"
+      v-for="(item, key) in assetsData"
       :key="key"
       class="card px-12 py-8 flex flex-col gr-4 justify-between"
       :class="[getMaterialById(item.flag)?.ban ? 'ban' : 'allow']"
@@ -9,20 +9,17 @@
       <div class="text-center relative">
         <img :src="item.src" width="120" />
       </div>
-      <div class="flex justify-between">
-        <div
-          class="flex gc-4"
-          :class="[item.tips === 'success' ? 'success' : '']"
-        >
-          <div>效率</div>
+      <div class="flex justify-between align-center text-nowrap">
+        <div class="flex gc-4">
+          <div>效率 </div>
           <div class="tag">
             +{{ getMaterialById(item.flag)?.accumulative }}
           </div>
         </div>
-        <div class="flex gc-4" :class="[item.tips === 'miss' ? 'miss' : '']">
-          <div>Miss</div>
+        <div class="flex gc-4">
+          <div>Miss </div>
           <div class="tag">
-            {{ parseInt(`${getMaterialById(item.flag)?.miss || 0 * 100}`) }}%
+            {{ parseInt(`${(getMaterialById(item.flag)?.miss || 0) * 100}`) }}%
           </div>
         </div>
       </div>
@@ -48,20 +45,9 @@
 </template>
 
 <script setup lang="ts">
-  import {
-    getMaterial,
-    getBackpack,
-    getMaterialById,
-  } from '@/store/modules/backpack/utils';
-  import { Material, Backpack } from '@/store/modules/backpack/types';
-  // eslint-disable-next-line import/no-cycle
-  import { AddventureType } from './data/addventure';
-
-  const props = defineProps<{
-    data: AddventureType[];
-  }>();
-
-  let clearFlag: any = 0;
+  import { getMaterialById } from '@/store/modules/backpack/utils';
+  import { AddventureType } from '../types';
+  import { assetsData } from './data/adventure';
 
   /* 开采/挖掘 */
   const dig = (item: AddventureType) => {
@@ -70,16 +56,9 @@
     const material = getMaterialById(item.flag);
     if (!material) return;
     if (Math.random() < material.miss) {
-      item.tips = 'miss';
       material.quantity += material.accumulative;
-    } else {
-      item.tips = 'success';
     }
     /* 提示 */
-    clearTimeout(clearFlag);
-    clearFlag = setTimeout(() => {
-      item.tips = false;
-    }, 500);
   };
 </script>
 
@@ -130,20 +109,10 @@
       color: white;
     }
   }
-  .success {
-    background-color: var(--success);
-    color: white;
-    .tag {
-      background-color: var(--success);
-      color: white;
-    }
-  }
-  .miss {
-    background-color: var(--warning);
-    color: white;
-    .tag {
-      background-color: var(--warning);
-      color: white;
-    }
+
+  .tag {
+    width: 42px;
+    text-align: center;
+    white-space: nowrap;
   }
 </style>

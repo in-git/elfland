@@ -1,13 +1,20 @@
 import { markRaw } from 'vue';
 import { GameStageList } from '../types';
-import addventureList from './data/addventure';
+import { assetsData } from './data/adventure';
 import PrimitiveSociety from './PrimitiveSociety.vue';
 import market from './data/market';
+import AdeventureList from './AdeventureList.vue';
 
 const list: GameStageList[] = [
   {
     name: '探险',
-    list: addventureList,
+    list: [
+      {
+        name: '野外',
+        component: markRaw(AdeventureList),
+        data: assetsData,
+      },
+    ],
   },
   {
     name: '商店',
