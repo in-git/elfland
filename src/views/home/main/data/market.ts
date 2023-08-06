@@ -38,7 +38,7 @@ const market: CommodityList[] = [
     component: markRaw(MakeupArtist),
   },
   {
-    name: '赌场',
+    name: '博弈',
     data: [],
     component: markRaw(GamebingVue),
   },
