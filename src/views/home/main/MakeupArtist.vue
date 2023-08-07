@@ -15,7 +15,7 @@
           </div>
           <div class="text-right">
             <div class="purchase elf_button text-12" @click="purchase(item)">
-              立即抢购
+              整容
             </div>
           </div>
         </div>

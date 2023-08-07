@@ -19,13 +19,13 @@ axios.interceptors.request.use(
     // this example using the JWT token
     // Authorization is a custom headers key
     // please modify it according to the actual situation
-    const token = getToken();
-    if (token) {
-      if (!config.headers) {
-        config.headers = {};
-      }
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    // const token = getToken();
+    // if (token) {
+    //   if (!config.headers) {
+    //     config.headers = {};
+    //   }
+    //   config.headers.Authorization = `Bearer ${token}`;
+    // }
     return config;
   },
   (error) => {
@@ -36,16 +36,24 @@ axios.interceptors.request.use(
 // add response interceptors
 axios.interceptors.response.use(
   (response: AxiosResponse<HttpResponse>) => {
-    const res = response.data;
+    let res = response.data;
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      // if (
-      //   [50008, 50012, 50014].includes(res.code) &&
-      //   response.config.url !== '/api/user/info'
-      // ) {
-      // }
-      return Promise.reject(new Error(res.msg || 'Error'));
+    // if (res.code !== 20000) {
+    // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+    // if (
+    //   [50008, 50012, 50014].includes(res.code) &&
+    //   response.config.url !== '/api/user/info'
+    // ) {
+    // }
+    //   return Promise.reject(new Error(res.msg || 'Error'));
+    // }
+    if (!res.data) {
+      res = {
+        data: response.data,
+        code: 20000,
+        msg: '',
+        status: 200,
+      };
     }
     return res;
   },
