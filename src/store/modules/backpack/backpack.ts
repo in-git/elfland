@@ -31,15 +31,6 @@ const materialStore = defineStore('material', {
       id: 'copper',
     },
     {
-      price: 0.75,
-      quantity: 0,
-      name: '鱼',
-      miss: 0.75,
-      accumulative: 1,
-      ban: true,
-      id: 'fish',
-    },
-    {
       price: 100,
       quantity: 0,
       name: '铁',

@@ -36,10 +36,10 @@
 </template>
 
 <script setup lang="ts">
+  import { computed } from 'vue';
   import { getMaterial, getMaterialById } from '@/store/modules/backpack/utils';
   import { getSocity } from '@/store/modules/society/utils';
   import { Technology } from '@/store/modules/society/types';
-  import { computed } from 'vue';
 
   const development = (item: Technology) => {
     const spend = getMaterialById(item.spend);
